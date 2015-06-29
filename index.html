@@ -2,12 +2,14 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>foso by fosojs</title>
+    <title>foso - a convention over configuration bundler</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <meta name="description" content="A convention over configuration bundler">
+    <meta name="keywords" content="bundler,HTML,CSS,JavaScript">
   </head>
   <body>
     <a class="fork-me" href="https://github.com/fosojs/foso">
@@ -19,104 +21,32 @@
     </section>
 
     <section class="main-content">
-      <h2>
-<a id="how-to-install-it" class="anchor" href="#how-to-install-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to install it?</h2>
+      <img class="monkeys" src="/img/3-wise-monkeys.png">
 
-<pre><code>$ npm install --save-dev foso
-</code></pre>
+      <p>Are you annoyed configuring gulp for each of your little projects? Use <a class="link" href="https://github.com/fosojs/foso">foso</a> to do all the boring stuff!</p>
 
-<h2>
-<a id="why-not-gulpgrunt-or-friends" class="anchor" href="#why-not-gulpgrunt-or-friends" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why not Gulp/Grunt or friends?</h2>
-
-<p>Gulp is a great task runner and has many libraries for bundling JavaScript and styles. However, a lot of configuration has to be done, to write a good gulpfile. Foso's manifesto is simplicity: everything should be bundled with zero configuration.</p>
-
-<p>Foso does a lot with little effort:</p>
-
-<ul>
-<li>Bundles the resources with the plugins you install.</li>
-<li>Watches for changes in the source files and rebundles them on change.</li>
-<li>Starts a LiveReload server that will reload the browser each time a bundle was updated.</li>
-<li>Optionally also hosts your resources with a static server.</li>
-</ul>
-
-<h2>
-<a id="plugins" class="anchor" href="#plugins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plugins</h2>
-
-<p>Foso uses plugins to fosify resources. Here are some plugins available for foso:</p>
-
-<ul>
-<li><a href="https://github.com/fosojs/fosify-js">fosify-js</a></li>
-<li><a href="https://github.com/fosojs/fosify-less">fosify-less</a></li>
-<li><a href="https://github.com/fosojs/fosify-sass">fosify-sass</a></li>
-<li><a href="https://github.com/fosojs/fosify-html">fosify-html</a></li>
-</ul>
-
-<h2>
-<a id="why-is-it-convention-over-configuration" class="anchor" href="#why-is-it-convention-over-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why is it convention over configuration?</h2>
-
-<p>Lets see why foso is convention over configuration on the example of the [Fosify JS][fosify-js] plugin.</p>
-
-<p>When using vanilla Browserify, each JavaScript file that has to be bundled needs to be specified. Fosify will bundle 2 types of JavaScript files:</p>
-
-<ol>
-<li>Files that are named <strong>bundle.js</strong> and are not in the root source directory. This files will be bundled, moved one folder up in the destination directory and renamed to the containing folder. For example, <strong>/src/foo/bundle.js</strong> would be bundled to <strong>/dest/foo.js</strong>.</li>
-<li>Files named <strong>[something].bundle.js</strong>. This files will be moved to the same directory as in the source folder and will be renamed, so that the bundle suffix is gone. For example, <strong>/src/foo/bar.bundle.js</strong> would be bundled to <strong>/dest/foo/bar.js</strong>.</li>
-</ol>
-
-<p>The same conventions work for the less and sass/scss files.</p>
-
-<h2>
-<a id="usage-example-in-the-code" class="anchor" href="#usage-example-in-the-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage example in the code</h2>
-
-<div class="highlight highlight-js"><pre><span class="pl-k">var</span> foso <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>foso<span class="pl-pds">'</span></span>);
-<span class="pl-k">var</span> less <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>fosify-less<span class="pl-pds">'</span></span>);
-
-foso
-  .please({
-    src<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>./public<span class="pl-pds">'</span></span>,
-    dest<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>./build<span class="pl-pds">'</span></span>,
-    watch<span class="pl-k">:</span> <span class="pl-c1">true</span>,
-    minify<span class="pl-k">:</span> <span class="pl-c1">true</span>
-  })
-  .fosify(less)
-  .now();</pre></div>
-
-<h2>
-<a id="using-foso-as-a-cli-tool" class="anchor" href="#using-foso-as-a-cli-tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using foso as a CLI tool</h2>
-
-<p>Everything that is foso you can use from the command line. To use foso as a CLI tool, install it globally:</p>
-
-<pre><code>npm install -g foso
-</code></pre>
-
-<p>However, foso is nothing without its plugins. When you install foso plugins globally, they will be used by foso every time you run it. Install some foso plugins globally:</p>
-
-<pre><code>npm install -g fosify-js fosify-less fosify-html
-</code></pre>
-
-<p>Now that you have foso and some plugins installed, you can use it to bundle/host your resources.</p>
-
-<p>If you want to bundle resources in the current working directory then run <code>foso build</code>. To bundle and minify your resources, run <code>foso build -m</code>.</p>
-
-<p>To bundle and serve your resources, run <code>foso serve</code>.</p>
+      <h1>foso manifesto</h1>
+      <ul>
+        <li>bundling should work with no configuration
+        <li>resources should be watched for changes
+        <li>pages should refresh when the resources were changed
+      </ul>
 
       <footer class="site-footer">
-        Made with &#10084; in Ungvar.
+        Made with <span class="love">&#10084;</span> in Ungvar.
       </footer>
 
     </section>
-
-            <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-64572930-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-64572930-1");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
   </body>
 </html>
 

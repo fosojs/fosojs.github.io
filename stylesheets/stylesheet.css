@@ -91,6 +91,7 @@ a {
   margin-bottom: 2rem;
   font-weight: normal;
   color: rgba(255, 255, 255, 0.498039);
+  text-transform: uppercase;
 }
 
 @media screen and (min-width: 64em) {
@@ -258,4 +259,24 @@ a {
 .fork-me img {
   max-width: 100%;
   border: 0;
+}
+
+.monkeys {
+  display: block;
+  margin: 0 auto;
+}
+
+.love {
+  color: #FF6969;
+}
+
+.link {
+  color: #300030;
+  border-bottom: 1px solid #300030;
+}
+
+.link:hover {
+  text-decoration: none;
+  background-color: #300030;
+  color: white;
 }
